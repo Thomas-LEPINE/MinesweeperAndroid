@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">MineSweeper</string>
     <string name="new_game">Nouvelle Partie</string>
-    <string name="resume_game">Continuer Partie</string>
-    <string name="settings">Paramètre</string>
+    <string name="difficulty">Difficulté :</string>
+    <string name="difficulty_easy">Facile</string>
+    <string name="difficulty_normal">Normale</string>
+    <string name="difficulty_difficile">Difficile</string>
+    <string name="settings">Paramètres</string>
     <string name="exit">Quitter</string>
     <string name="timer">Timer</string>
     <string name="switch_text"></string>
