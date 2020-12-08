@@ -24,10 +24,9 @@
 
             <TextView
                 android:id="@+id/tvTimer"
-                android:layout_width="57dp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="32dp"
                 android:layout_weight="1"
                 android:text="@string/timer"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -41,8 +40,9 @@
 
             <Switch
                 android:id="@+id/swMode"
-                android:layout_width="wrap_content"
+                android:layout_width="32dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
                 android:layout_weight="1"
                 android:text="@string/switch_text" />
         </LinearLayout>
@@ -51,6 +51,15 @@
             android:id="@+id/lyhHexa"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hexa_rcv"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

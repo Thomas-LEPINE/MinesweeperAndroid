@@ -6,9 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".Hexa">
 
-    <ImageView
-        android:id="@+id/ivHexa"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/hexagon" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="50dp"
+                android:layout_height="84dp"
+                android:paddingLeft="@android:dimen/app_icon_size"
+                android:paddingRight="@android:dimen/app_icon_size"
+                android:scaleType="fitXY"
+                android:src="@drawable/hexagon3" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="50dp"
+                android:layout_height="84dp"
+                android:paddingTop="@android:dimen/app_icon_size"
+                android:paddingRight="@android:dimen/app_icon_size"
+                android:scaleType="fitXY"
+                android:src="@drawable/hexagon3" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                style="@style/Widget.AppCompat.ImageButton"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/hexagon" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="80dp" >
+
+            <LinearLayout
+                android:id="@+id/custom_buttom"
+                android:layout_width="101dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_button_hex">
+
+                <!-- Beer icon and all other stuff -->
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/myimageview"
+                android:layout_width="75dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/hexagon" />
+
+        </RelativeLayout>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/do_nothing"
+                android:layout_width="120dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="-3dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/shape_button_hex_mask"
+                android:soundEffectsEnabled="false"></ImageView>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/hexagon" />
+        </TableRow>
+    </TableLayout>
+
 </FrameLayout>
