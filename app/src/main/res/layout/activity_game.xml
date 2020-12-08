@@ -32,6 +32,13 @@
                 android:text="@string/timer"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <Button
+                android:id="@+id/btnBackMenu"
+                android:layout_width="34dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/menu" />
+
             <Switch
                 android:id="@+id/swMode"
                 android:layout_width="wrap_content"
