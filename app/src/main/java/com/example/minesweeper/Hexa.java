@@ -49,7 +49,7 @@ public class Hexa extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_hexa,container, false);
-        _ivMine = v.findViewById(R.id.ivHexa);
+        _ivMine = v.findViewById(R.id.ivMine);
 /*      _
         _ivMine.setOnClickListener(new View.OnClickListener() {
 
@@ -69,7 +69,7 @@ public class Hexa extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         _bpHexa = getView().findViewById(R.id.bpHexa);
-        _ivMine = getActivity().findViewById(R.id.ivHexa);
+        _ivMine = getActivity().findViewById(R.id.ivMine);
         _bpHexa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

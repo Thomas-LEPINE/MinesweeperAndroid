@@ -13,9 +13,9 @@
         android:background="#00FFFFFF" />
 
     <ImageView
-        android:id="@+id/ivHexa"
+        android:id="@+id/ivMine"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/hexagon" />
+        android:src="@drawable/hexagon3" />
 
 </FrameLayout>
