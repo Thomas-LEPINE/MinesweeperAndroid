@@ -1,6 +1,9 @@
 package com.example.minesweeper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
@@ -25,16 +28,29 @@ public class Game extends AppCompatActivity {
         Coordinator  coor = new Coordinator(this,setOfMines);
         setOfMines.add(new Hexa(1,2));
         setOfMines.add(new Hexa(2,4));
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.lyhHexa,setOfMines.get(0))
-                .commit();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.lyhHexa,setOfMines.get(1))
-                .commit();
+        setOfMines.add(new Hexa(3,2));
+        setOfMines.add(new Hexa(4,4));
 
-        RecyclerView hexaRcv;
-        //hexaRcv = (RecyclerView)  findViewById(R.id.hexa_rcv);
-        //GridLayoutManager manager = new GridLayoutManager(this, 3);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.clyHexa,setOfMines.get(2))
+                .commit();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.clyHexa,setOfMines.get(0))
+                .commit();
+        getSupportFragmentManager().beginTransaction()
+               .add(R.id.temp,setOfMines.get(1))
+          //      .replace();
+             .commit();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
+        /*ConstraintSet set = new ConstraintSet();
+        set.clone((ConstraintLayout)findViewById(R.id.clyHexa));
+        set.connect(R.id.clyHexa,ConstraintSet.START,ConstraintSet.PARENT_ID,ConstraintSet.START,400);
+        set.connect(R.id.clyHexa,ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP,200);
+        set.applyTo((ConstraintLayout)findViewById(R.id.clyHexa));
+*/
     }
 
     @Override
