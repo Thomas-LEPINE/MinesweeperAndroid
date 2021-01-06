@@ -6,10 +6,11 @@
     <string name="difficulty_normal">Normale</string>
     <string name="difficulty_difficile">Difficile</string>
     <string name="settings">Paramètres</string>
+    <string name="credit">Crédit</string>
     <string name="exit">Quitter</string>
+    <string name="retour_menu">Retour au menu</string>
     <string name="timer">Timer</string>
     <string name="switch_text"></string>
     <string name="menu">Menu</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_credit">"Ce jeu a été developpé par :\n- Sylvain Courty\n- Caitlin Jolivet\n- Thomas Lépine\n\nLes images utilisées sont libres de droits\n\n\n\nSi vous aviez clické sur le bouton pour une demande de crédit, ce n'est pas la bonne application, merci de vous tourner vers votre banque."</string>
 </resources>
