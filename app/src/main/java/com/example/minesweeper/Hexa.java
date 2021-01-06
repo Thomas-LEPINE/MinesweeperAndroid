@@ -48,9 +48,19 @@ public class Hexa extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        System.out.println(this._row);
         v = inflater.inflate(R.layout.fragment_hexa,container, false);
+        _bpHexa = v.findViewById(R.id.bpHexa);
         _ivMine = v.findViewById(R.id.ivMine);
-/*      _
+        _bpHexa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "You Clicked the button!"+ String.valueOf(_row), Toast.LENGTH_LONG).show();
+                System.out.println("Clicked on " + String.valueOf(_row));
+                _ivMine.setImageResource(R.drawable.hexagon1);
+            }
+        });
+        /*
         _ivMine.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -70,14 +80,14 @@ public class Hexa extends Fragment {
         super.onActivityCreated(savedInstanceState);
         _bpHexa = getView().findViewById(R.id.bpHexa);
         _ivMine = getActivity().findViewById(R.id.ivMine);
-        _bpHexa.setOnClickListener(new View.OnClickListener() {
+       /* _bpHexa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "You Clicked the button!"+ String.valueOf(_row), Toast.LENGTH_LONG).show();
                 System.out.println("Clicked on " + String.valueOf(_row));
                 _ivMine.setImageResource(R.drawable.hexagon1);
             }
-        });
+        });*/
     }
 
     public void linkTogether(Coordinator c) {

@@ -70,156 +70,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <fragment
-                    android:id="@+id/frag84"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="488dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag83"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="488dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag86"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="176dp"
-                    android:layout_marginTop="488dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag87"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="224dp"
-                    android:layout_marginTop="488dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag88"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="272dp"
-                    android:layout_marginTop="488dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag89"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="320dp"
-                    android:layout_marginTop="488dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag85"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="128dp"
-                    android:layout_marginTop="488dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag75"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="444dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag77"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="104dp"
-                    android:layout_marginTop="444dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag78"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="152dp"
-                    android:layout_marginTop="444dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag79"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="200dp"
-                    android:layout_marginTop="444dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag80"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="248dp"
-                    android:layout_marginTop="444dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag82"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="344dp"
-                    android:layout_marginTop="444dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag81"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="296dp"
-                    android:layout_marginTop="444dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
-                    android:id="@+id/frag76"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginTop="444dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
                     android:id="@+id/frag69"
                     android:name="com.example.minesweeper.Hexa"
                     android:layout_width="50dp"
@@ -470,7 +320,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <fragment
-                    android:id="@+id/frag54"
+                    android:id="@+id/frag53"
                     android:name="com.example.minesweeper.Hexa"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -770,16 +620,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <fragment
-                    android:id="@+id/frag17"
-                    android:name="com.example.minesweeper.Hexa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="104dp"
-                    android:layout_marginTop="92dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <fragment
                     android:id="@+id/frag15"
                     android:name="com.example.minesweeper.Hexa"
                     android:layout_width="50dp"
@@ -805,6 +645,16 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="56dp"
+                    android:layout_marginTop="92dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <fragment
+                    android:id="@+id/frag17"
+                    android:name="com.example.minesweeper.Hexa"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="104dp"
                     android:layout_marginTop="92dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

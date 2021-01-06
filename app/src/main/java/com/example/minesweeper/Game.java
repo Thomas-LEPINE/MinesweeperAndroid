@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game extends AppCompatActivity {
 
     private Button btnBackMenu = null;
@@ -16,7 +19,10 @@ public class Game extends AppCompatActivity {
     /* attributs */
     private int countTimer =0;
     private int difficulty;
+    private int nbbomb = 15;
+    private List<Hexa> bomblist = new ArrayList<Hexa>();
     /* ###### */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,12 @@ public class Game extends AppCompatActivity {
             }
         };
         t.start();
+        for( int i =0; i<nbbomb;i++) {
+            bomblist.add(new Hexa(i,i));
+
+        }
+
+
     }
 
     @Override
