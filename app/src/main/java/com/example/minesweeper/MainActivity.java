@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnChangeDifficulty;
     private Button btnSetings;
     private Button btnExit;
+    private Button btnCredit;
     /* ##### */
 
     /* Attributs */
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         btnChangeDifficulty = (Button) findViewById(R.id.btnChangeDifficulty);
         btnSetings = (Button) findViewById(R.id.btnSetings);
         btnExit = (Button) findViewById(R.id.btnExit);
+        btnCredit = (Button) findViewById(R.id.btnCredit);
 
         // La difficultée est mise à facile au début
         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
@@ -65,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
                         difficulty = 0;
                         break;
                 }
+            }
+        });
+
+        btnCredit.setOnClickListener(new View.OnClickListener() { // Bouton crédit
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Credit.class);  //Lancer l'activité DisplayVue
+                startActivity(intent);    //Afficher la vue
             }
         });
 
