@@ -26,26 +26,12 @@ public class Game extends AppCompatActivity {
     private List<Hexa> bomblist = new ArrayList<Hexa>();
     /* ###### */
 
-    private Button bptest;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         btnBackMenu=findViewById(R.id.btnBackMenu);
         tvTimer = findViewById(R.id.tvTimer);
-        bptest=findViewById(R.id.btntest);
-        bptest.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Do something in response to button click
-                System.out.println(bomblist);
-                for(int i=0;i<nbbomb;i++) {
-                   bomblist.get(i).test();
-                }
-            }
-        });
-
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -68,35 +54,31 @@ public class Game extends AppCompatActivity {
         };
         t.start();
 
-        //Generate list of hexa
+        //Calcul des numero de ligne et colonne et des id
         int numcol=0;
         int numrow=0;
         int maxcurrow=8;
         for( int i =0; i<nbbomb;i++) {
-            if(numrow==maxcurrow) {
-                numrow=0;
-                numcol+=1;
-                if(maxcurrow==8){
-                    maxcurrow=7;
+            if (numrow == maxcurrow) {
+                numrow = 0;
+                numcol += 1;
+                if (maxcurrow == 8) {
+                    maxcurrow = 7;
                 } else {
-                    maxcurrow=8;
+                    maxcurrow = 8;
                 }
             }
-            String idtemp= "frag"+String.valueOf(i);
-            int intidtemp=getResources().getIdentifier(idtemp,"id",getPackageName());
+            String idtemp = "frag" + String.valueOf(i);
+            int intidtemp = getResources().getIdentifier(idtemp, "id", getPackageName());
             //System.out.println(String.valueOf(numrow)+"   "+String.valueOf(numcol));
-            Hexa hextemp= (Hexa) getSupportFragmentManager().findFragmentById(intidtemp);
-            hextemp.SetHexa(numcol,numrow,i);
+            Hexa hextemp = (Hexa) getSupportFragmentManager().findFragmentById(intidtemp);
+            hextemp.SetHexa(numcol, numrow, i);
+            //Tous les fragments sont stockés dans cette liste
             bomblist.add(hextemp);
             bomblist.get(i).test();
-            numrow+=1;
-        }
-
-
+            numrow += 1;
+        }   
     }
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -106,10 +88,5 @@ public class Game extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-
-    public void testfuncion(){
-        System.out.println(bomblist);
     }
 }
