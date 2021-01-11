@@ -17,7 +17,7 @@ public class Coordinator {
 
     private void linkTogether() {
         for(int i=0;i<_setOfMine.size();i++) {
-            _setOfMine.get(i).linkTogether(this);
+            //_setOfMine.get(i).linkTogether(this);
         }
     }
 }
