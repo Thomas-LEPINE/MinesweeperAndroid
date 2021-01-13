@@ -39,7 +39,7 @@ public class Game extends AppCompatActivity {
         tvTimer = findViewById(R.id.tvTimer);
         swMode=findViewById(R.id.swMode);
 
-        // btntest=findViewById(R.id.button);
+        btntest = findViewById(R.id.button);
         tvTimer = findViewById(R.id.tvTimer);
         Thread t = new Thread() {
             @Override
