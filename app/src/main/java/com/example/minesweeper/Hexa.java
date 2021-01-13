@@ -22,9 +22,10 @@ import java.util.List;
 public class Hexa extends Fragment implements View.OnClickListener {
     private int _row;
     private int _col;
-    private int _state;
+    private boolean _state;  //Si retourner ou non; true visible
     private int _id;
-    private int _nbbombes;
+    private int _nbbombes;  //-1 est une bombe; entre 0 et 6 le nombre de bombe a cote
+    private boolean _isbomb;
     private List<Integer> neighbours = new ArrayList<Integer>();
     private ImageView _ivMine;
     private Button _bpHexa;
@@ -43,7 +44,8 @@ public class Hexa extends Fragment implements View.OnClickListener {
         this._row=r;
         this._col=c;
         this._id=i;
-        this._state=0;
+        this._state=false;
+        this._nbbombes=-4;
         computeNeighbour();
     }
     public void computeNeighbour() {
@@ -105,16 +107,41 @@ public class Hexa extends Fragment implements View.OnClickListener {
         this.displayneighbor();
         Game activity=(Game) getActivity();
         System.out.println(activity.getStateSwitch());
-        if(activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
-        {
-            if (this._state == 0) {
-                _ivMine.setImageResource(R.drawable.hexagon1);
-                _state = 1;
-            } else if (this._state == 1) {
-                _ivMine.setImageResource(R.drawable.hexagon2);
-                _state = 0;
+        if(!_state) {
+        //si carte non visible
+            if(activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
+            {
+                //Ajout drapeau
+                switch (_nbbombes){
+                    case -4:
+                        _ivMine.setImageResource(R.drawable.hexagon5);
+                        _nbbombes=-3;
+                    case -3:
+                        _ivMine.setImageResource(R.drawable.hexagon6);
+                        _nbbombes=-2;
+                    case -2:
+                        _ivMine.setImageResource(R.drawable.hexagon3);
+                        _nbbombes=-4;
+
+
+
+                }
+
+
+
+            } else {
+                //on decouvre
+                this._state=true;
+                if (!this._state) {
+                    _ivMine.setImageResource(R.drawable.hexagon1);
+                    _state = true;
+                } else if (this._state ) {
+                    _ivMine.setImageResource(R.drawable.hexagon2);
+                    _state = false;
+                }
             }
         }
+
     }
 
     public void displayneighbor(){
