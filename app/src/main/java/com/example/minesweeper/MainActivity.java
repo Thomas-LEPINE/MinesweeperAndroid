@@ -3,18 +3,20 @@ package com.example.minesweeper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
     /* COMPOSANTS */
     private Button btnGame;
     private Button btnChangeDifficulty;
     private Button btnSetings;
     private Button btnExit;
     private Button btnCredit;
+    private Button btnScore;
     /* ##### */
 
     /* Attributs */
@@ -31,10 +33,12 @@ public class MainActivity extends AppCompatActivity {
         btnSetings = (Button) findViewById(R.id.btnSetings);
         btnExit = (Button) findViewById(R.id.btnExit);
         btnCredit = (Button) findViewById(R.id.btnCredit);
+        btnScore = (Button) findViewById(R.id.btnScore);
 
         // La difficultée est mise à facile au début
         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
         difficulty = 0;
+
     }
 
 
@@ -82,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Game.class));
+            }
+        });
+
+        btnScore.setOnClickListener(new View.OnClickListener() { // Bouton crédit
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ScoreBoard.class);  //Lancer l'activité DisplayVue
+                startActivity(intent);    //Afficher la vue
             }
         });
 
