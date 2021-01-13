@@ -13,5 +13,5 @@
     <string name="switch_text"></string>
     <string name="menu">Menu</string>
     <string name="titre_app">LE DÉMINEUR</string>
-    <string name="text_credit">"Ce jeu a été developpé par :\n- Sylvain Courty\n- Caitlin Jolivet\n- Thomas Lépine\n\nLes images utilisées sont libres de droits\n\n\n\nSi vous aviez clické sur le bouton pour une demande de crédit, ce n'est pas la bonne application, merci de vous tourner vers votre banque."</string>
+    <string name="text_credit">"Ce jeu a été developpé par :\n- Sylvain Courty\n- Caitlin Jolivet\n- Thomas Lépine\n\nLes images utilisées sont libres de droits\n\n\n\nSi vous aviez cliqué sur le bouton pour une demande de crédit, ce n'est pas la bonne application, merci de vous tourner vers votre banque."</string>
 </resources>
