@@ -104,7 +104,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
         //System.out.println(this);
         this.displayneighbor();
         Game activity=(Game) getActivity();
-        System.out.println(activity.getStateSwitch());
+        // System.out.println(activity.getStateSwitch());
         if(activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
         {
             if (this._state == 0) {
@@ -122,7 +122,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
         for(int i=0;i<neighbours.size();i++){
             s+=" "+String.valueOf(neighbours.get(i))+" ";
         }
-        System.out.println(s);
+        // System.out.println(s);
     }
     public void test() {
         System.out.println("Hexa : " + String.valueOf(_row)+"   "+String.valueOf(_col)+"    "+String.valueOf(_id));

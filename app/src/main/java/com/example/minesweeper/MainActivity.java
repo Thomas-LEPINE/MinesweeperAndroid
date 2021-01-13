@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     /* ##### */
 
     /* Attributs */
-    private int difficulty;
+    private int difficultyNbBombes;
     /* ###### */
 
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         // La difficultée est mise à facile au début
         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
-        difficulty = 0;
+        difficultyNbBombes = 7;
     }
 
 
@@ -45,26 +45,26 @@ public class MainActivity extends AppCompatActivity {
         btnChangeDifficulty.setOnClickListener(new View.OnClickListener() { // Bouton difficulté
             @Override
             public void onClick(View v) {
-                switch(difficulty){
-                    case 0:
+                switch(difficultyNbBombes){
+                    case 7:
                         // Facile -> normal
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_normal));
-                        difficulty = 1;
+                        difficultyNbBombes = 15;
                         break;
-                    case 1:
+                    case 15:
                         // normal -> difficile
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_difficile));
-                        difficulty = 2;
+                        difficultyNbBombes = 22;
                         break;
-                    case 2:
+                    case 22:
                         // difficile -> facile
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
-                        difficulty = 0;
+                        difficultyNbBombes = 7;
                         break;
                     default:
                         // ? (bug) -> facile
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
-                        difficulty = 0;
+                        difficultyNbBombes = 7;
                         break;
                 }
             }
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bundleGame = new Bundle();
                 Intent intentGame = new Intent(MainActivity.this, Game.class);  //Game
-                // intentGame.putExtras(bundleGame.putString(difficulty, int));
+                intentGame.putExtra("difficultyNbBombes", difficultyNbBombes);
                 startActivity(intentGame);
             }
         });
