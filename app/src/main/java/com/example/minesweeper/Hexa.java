@@ -107,8 +107,9 @@ public class Hexa extends Fragment implements View.OnClickListener {
         this.displayneighbor();
         Game activity=(Game) getActivity();
         System.out.println(activity.getStateSwitch());
+
         if(!_state) {
-        //si carte non visible
+/*        //si carte non visible
             if(activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
             {
                 //Ajout drapeau
@@ -139,7 +140,8 @@ public class Hexa extends Fragment implements View.OnClickListener {
                     _ivMine.setImageResource(R.drawable.hexagon2);
                     _state = false;
                 }
-            }
+
+            }*/
         }
 
     }

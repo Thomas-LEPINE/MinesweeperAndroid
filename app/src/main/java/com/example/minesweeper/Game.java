@@ -36,9 +36,10 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         btnBackMenu=findViewById(R.id.btnBackMenu);
+        tvTimer = findViewById(R.id.tvTimer);
         swMode=findViewById(R.id.swMode);
 
-        btntest=findViewById(R.id.button);
+        btntest = findViewById(R.id.button);
         tvTimer = findViewById(R.id.tvTimer);
         Thread t = new Thread() {
             @Override
@@ -87,6 +88,7 @@ public class Game extends AppCompatActivity {
             numrow += 1;
         }   
     }
+
     @Override
     protected void onStart() {
         super.onStart();
