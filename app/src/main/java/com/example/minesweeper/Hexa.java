@@ -43,6 +43,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
         this._row=r;
         this._col=c;
         this._id=i;
+        this._state=0;
         computeNeighbour();
     }
     public void computeNeighbour() {
@@ -89,6 +90,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_hexa,container, false);
 
+        _ivMine=v.findViewById(R.id.ivMine);
         //Ajout d'un listener sur l'hexagone
         _bpHexa=(Button) v.findViewById(R.id.bpHexa);
         _bpHexa.setOnClickListener(this);
@@ -101,6 +103,18 @@ public class Hexa extends Fragment implements View.OnClickListener {
         //Ici le code quand on click sur chaque hexagone
         //System.out.println(this);
         this.displayneighbor();
+        Game activity=(Game) getActivity();
+        System.out.println(activity.getStateSwitch());
+        if(activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
+        {
+            if (this._state == 0) {
+                _ivMine.setImageResource(R.drawable.hexagon1);
+                _state = 1;
+            } else if (this._state == 1) {
+                _ivMine.setImageResource(R.drawable.hexagon2);
+                _state = 0;
+            }
+        }
     }
 
     public void displayneighbor(){

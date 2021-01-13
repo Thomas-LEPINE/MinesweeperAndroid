@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,11 +27,18 @@ public class Game extends AppCompatActivity {
     private List<Hexa> bomblist = new ArrayList<Hexa>();
     /* ###### */
 
+    private Switch swMode;
+    Bundle data = new Bundle();
+    private Button btntest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         btnBackMenu=findViewById(R.id.btnBackMenu);
+        swMode=findViewById(R.id.swMode);
+
+        btntest=findViewById(R.id.button);
         tvTimer = findViewById(R.id.tvTimer);
         Thread t = new Thread() {
             @Override
@@ -88,5 +96,27 @@ public class Game extends AppCompatActivity {
                 finish();
             }
         });
+        btntest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testfunction();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+    private void testfunction(){
+        System.out.println("Test fct");
+        System.out.println(swMode.isChecked());
+
+
+    }
+
+    public boolean getStateSwitch() {
+       return swMode.isChecked();
     }
 }
