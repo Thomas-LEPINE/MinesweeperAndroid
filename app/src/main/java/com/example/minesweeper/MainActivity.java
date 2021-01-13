@@ -95,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.finish();
+                System.exit(0);
+            }
+        });
+
     }
 
 }
