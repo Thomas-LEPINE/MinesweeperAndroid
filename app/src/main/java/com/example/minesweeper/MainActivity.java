@@ -81,11 +81,13 @@ public class MainActivity extends AppCompatActivity {
         btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Game.class));
+                Bundle bundleGame = new Bundle();
+                Intent intentGame = new Intent(MainActivity.this, Game.class);  //Game
+                // intentGame.putExtras(bundleGame.putString(difficulty, int));
+                startActivity(intentGame);
             }
         });
 
     }
-
 
 }

@@ -108,10 +108,10 @@ public class Hexa extends Fragment implements View.OnClickListener {
         if(activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
         {
             if (this._state == 0) {
-                _ivMine.setImageResource(R.drawable.hexagon1);
+                _ivMine.setImageResource(R.drawable.hexwater);
                 _state = 1;
             } else if (this._state == 1) {
-                _ivMine.setImageResource(R.drawable.hexagon2);
+                _ivMine.setImageResource(R.drawable.hex0);
                 _state = 0;
             }
         }
