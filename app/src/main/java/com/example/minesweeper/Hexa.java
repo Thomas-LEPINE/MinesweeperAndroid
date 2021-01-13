@@ -24,6 +24,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
     private int _col;
     private boolean _state;  //Si retourner ou non; true visible
     private int _id;
+    private int _flag;
     private int _nbbombes;  //-1 est une bombe; entre 0 et 6 le nombre de bombe a cote
     private boolean _isbomb;
     private List<Integer> neighbours = new ArrayList<Integer>();
@@ -46,6 +47,8 @@ public class Hexa extends Fragment implements View.OnClickListener {
         this._id=i;
         this._state=false;
         this._nbbombes=-4;
+        this._flag=0;
+
         computeNeighbour();
     }
     public void computeNeighbour() {
@@ -93,6 +96,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
         v = inflater.inflate(R.layout.fragment_hexa,container, false);
 
         _ivMine=v.findViewById(R.id.ivMine);
+        _ivMine.setImageResource(R.drawable.hexwater);
         //Ajout d'un listener sur l'hexagone
         _bpHexa=(Button) v.findViewById(R.id.bpHexa);
         _bpHexa.setOnClickListener(this);
@@ -104,47 +108,70 @@ public class Hexa extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         //Ici le code quand on click sur chaque hexagone
         //System.out.println(this);
-        this.displayneighbor();
-        Game activity=(Game) getActivity();
+        //this.displayneighbor();
+        Game activity = (Game) getActivity();
         System.out.println(activity.getStateSwitch());
-
-        if(!_state) {
-/*        //si carte non visible
-            if(activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
+        if (!_state) {
+            //si carte non visible
+            if (activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
             {
+                System.out.println(_flag);
                 //Ajout drapeau
-                switch (_nbbombes){
-                    case -4:
-                        _ivMine.setImageResource(R.drawable.hexagon5);
-                        _nbbombes=-3;
-                    case -3:
-                        _ivMine.setImageResource(R.drawable.hexagon6);
-                        _nbbombes=-2;
-                    case -2:
-                        _ivMine.setImageResource(R.drawable.hexagon3);
-                        _nbbombes=-4;
+                switch (_flag) {
+                    case 0:
 
-
-
+                        _ivMine.setImageResource(R.drawable.hexflag);
+                        _flag = 1;
+                        break;
+                    case 1:
+                        _ivMine.setImageResource(R.drawable.hexquestion);
+                        _flag = 2;
+                        break;
+                    case 2:
+                        _ivMine.setImageResource(R.drawable.hexwater);
+                        _flag = 0;
+                        break;
                 }
-
-
-
             } else {
                 //on decouvre
-                this._state=true;
-                if (!this._state) {
-                    _ivMine.setImageResource(R.drawable.hexagon1);
-                    _state = true;
-                } else if (this._state ) {
-                    _ivMine.setImageResource(R.drawable.hexagon2);
-                    _state = false;
+                if (this._flag == 0) {
+                    this._state = true;
+                    if (!this._state) {
+                        //si deja retourner
+                        _ivMine.setImageResource(R.drawable.hex1);
+                        _state = true;
+                    } else {
+                        //si pas retourner
+                        System.out.println(_nbbombes);
+                        if (_nbbombes!=-1) {
+                            switch (_nbbombes) {
+                                case 0:
+                                    _ivMine.setImageResource(R.drawable.hex0);
+                                case 1:
+                                    _ivMine.setImageResource(R.drawable.hex1);
+                                case 2:
+                                    _ivMine.setImageResource(R.drawable.hex2);
+                                case 3:
+                                    _ivMine.setImageResource(R.drawable.hex3);
+                                case 4:
+                                    _ivMine.setImageResource(R.drawable.hex4);
+                                case 5:
+                                    _ivMine.setImageResource(R.drawable.hex5);
+                                case 6:
+                                    _ivMine.setImageResource(R.drawable.hex6);
+                            }
+                        } else {
+                            System.out.println("Lost");
+                            _ivMine.setImageResource(R.drawable.hexexplose);
+                        }
+
+
+                    }
                 }
-
-            }*/
+            }
         }
-
     }
+
 
     public void displayneighbor(){
         String s=String.valueOf(_id)+" has ";
@@ -155,5 +182,8 @@ public class Hexa extends Fragment implements View.OnClickListener {
     }
     public void test() {
         System.out.println("Hexa : " + String.valueOf(_row)+"   "+String.valueOf(_col)+"    "+String.valueOf(_id));
+    }
+    public void setBombe() {
+        this._nbbombes=-1;
     }
 }
