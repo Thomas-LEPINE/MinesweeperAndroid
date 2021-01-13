@@ -1,12 +1,17 @@
 package com.example.minesweeper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends AppCompatActivity {
 
@@ -16,16 +21,25 @@ public class Game extends AppCompatActivity {
     /* attributs */
     private int countTimer =0;
     private int difficulty;
+    private int nbbomb = 75;
+    private int maxlenrow=8;
+    private int ncol=10;
+    private List<Hexa> bomblist = new ArrayList<Hexa>();
     /* ###### */
+
+    private Switch swMode;
+    Bundle data = new Bundle();
+    private Button btntest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         btnBackMenu=findViewById(R.id.btnBackMenu);
-        tvTimer = findViewById(R.id.tvTimer);
-        
+        swMode=findViewById(R.id.swMode);
 
+        btntest=findViewById(R.id.button);
+        tvTimer = findViewById(R.id.tvTimer);
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -47,8 +61,32 @@ public class Game extends AppCompatActivity {
             }
         };
         t.start();
-    }
 
+        //Calcul des numero de ligne et colonne et des id
+        int numcol=0;
+        int numrow=0;
+        int maxcurrow=8;
+        for( int i =0; i<nbbomb;i++) {
+            if (numrow == maxcurrow) {
+                numrow = 0;
+                numcol += 1;
+                if (maxcurrow == 8) {
+                    maxcurrow = 7;
+                } else {
+                    maxcurrow = 8;
+                }
+            }
+            String idtemp = "frag" + String.valueOf(i);
+            int intidtemp = getResources().getIdentifier(idtemp, "id", getPackageName());
+            //System.out.println(String.valueOf(numrow)+"   "+String.valueOf(numcol));
+            Hexa hextemp = (Hexa) getSupportFragmentManager().findFragmentById(intidtemp);
+            hextemp.SetHexa(numcol, numrow, i);
+            //Tous les fragments sont stockés dans cette liste
+            bomblist.add(hextemp);
+            bomblist.get(i).test();
+            numrow += 1;
+        }   
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -58,5 +96,27 @@ public class Game extends AppCompatActivity {
                 finish();
             }
         });
+        btntest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testfunction();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+    private void testfunction(){
+        System.out.println("Test fct");
+        System.out.println(swMode.isChecked());
+
+
+    }
+
+    public boolean getStateSwitch() {
+       return swMode.isChecked();
     }
 }
