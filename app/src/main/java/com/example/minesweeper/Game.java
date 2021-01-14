@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game extends AppCompatActivity {
 
@@ -87,9 +88,11 @@ public class Game extends AppCompatActivity {
             bomblist.get(i).test();
             numrow += 1;
         }
-        bomblist.get(10).setBombe();
-        bomblist.get(11).setBombe();
-        bomblist.get(12).setBombe();
+        //bomblist.get(10).setBombe();
+        //bomblist.get(11).setBombe();
+        //bomblist.get(12).setBombe();
+        generatebombes(10);
+        computeneighbourbomb();
     }
 
     @Override
@@ -115,13 +118,73 @@ public class Game extends AppCompatActivity {
 
     }
     private void testfunction(){
-        System.out.println("Test fct");
-        System.out.println(swMode.isChecked());
-
+        //System.out.println("Test fct");
+        //System.out.println(swMode.isChecked());
+        printallbombes();
 
     }
 
     public boolean getStateSwitch() {
        return swMode.isChecked();
+    }
+
+    public void generatebombes(int n) {
+        System.out.println("generation des bombes");
+        int generated=0;
+        //int[] malist = new int[n];
+        Random r = new Random();
+        while(generated<n){
+            int temp = r.nextInt(nbbomb);
+            System.out.println(generated);
+            if(!bomblist.get(temp).isBomb()){
+                generated+=1;
+                bomblist.get(temp).setBombe();
+            } else {
+
+            }
+        }
+    }
+    public void printallbombes() {
+        int c=0;
+        for(int i=0; i<nbbomb;i++) {
+           bomblist.get(i).printbombe();
+            if(!bomblist.get(i).isBomb()){
+                c+=1;
+            }
+        }
+        System.out.println("Nombre de bombes :" + String.valueOf(c));
+    }
+
+    public void computeneighbourbomb() {
+        List<Integer> listtemp;
+        System.out.println("computing bombes");
+        for(int i=0;i<nbbomb;i++) {
+            if (!bomblist.get(i).isBomb()) {
+                listtemp = bomblist.get(i).getNeighbours();
+                int c = 0;
+                for (int j = 0; j < listtemp.size(); j++) {
+                    if (bomblist.get(listtemp.get(j)).isBomb()) {
+                        System.out.println(String.valueOf(listtemp.get(j)) + " is a bombe");
+                        c++;
+                    }
+                }
+                bomblist.get(i).setNeigbour(c);
+            }
+        }
+    }
+
+
+
+    public void displayblank(int id) {
+        List<Integer> listtemp;
+        listtemp = bomblist.get(id).getNeighbours();
+        for(int i=0;i<listtemp.size();i++) {
+            if(bomblist.get(listtemp.get(i)).isRetournable()) {
+                if(bomblist.get(listtemp.get(i)).Retourner()) {
+                    displayblank(listtemp.get(i));
+                }
+
+            }
+        }
     }
 }
