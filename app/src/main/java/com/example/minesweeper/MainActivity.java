@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 myEditor.apply();
                 //Supression de la connection au service
                 doUnbindService();
+                finishAffinity();
                 System.exit(0);
 
             }
