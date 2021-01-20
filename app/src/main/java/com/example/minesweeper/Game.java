@@ -17,7 +17,9 @@ import java.util.Random;
 public class Game extends AppCompatActivity {
 
     private Button btnBackMenu = null;
+    private Button btnNewGame=null;
     TextView tvTimer;
+    Thread t =null;
 
     /* attributs */
     private int countTimer =0;
@@ -25,7 +27,9 @@ public class Game extends AppCompatActivity {
     private int nbbomb = 75;
     private int maxlenrow=8;
     private int ncol=10;
+    private int nbbombleft;
     private List<Hexa> bomblist = new ArrayList<Hexa>();
+
     /* ###### */
 
     private Switch swMode;
@@ -40,9 +44,11 @@ public class Game extends AppCompatActivity {
         tvTimer = findViewById(R.id.tvTimer);
         swMode=findViewById(R.id.swMode);
 
+        btnNewGame=findViewById(R.id.btnNewGame);
+        btnNewGame.setVisibility(View.INVISIBLE);
         btntest = findViewById(R.id.button);
         tvTimer = findViewById(R.id.tvTimer);
-        Thread t = new Thread() {
+        t = new Thread() {
             @Override
             public void run() {
                 while (!isInterrupted()) {
@@ -60,6 +66,9 @@ public class Game extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            }
+            public void onFinish() {
+
             }
         };
         t.start();
@@ -91,6 +100,7 @@ public class Game extends AppCompatActivity {
         //bomblist.get(10).setBombe();
         //bomblist.get(11).setBombe();
         //bomblist.get(12).setBombe();
+        nbbombleft=10;
         generatebombes(10);
         computeneighbourbomb();
     }
@@ -180,11 +190,39 @@ public class Game extends AppCompatActivity {
         listtemp = bomblist.get(id).getNeighbours();
         for(int i=0;i<listtemp.size();i++) {
             if(bomblist.get(listtemp.get(i)).isRetournable()) {
-                if(bomblist.get(listtemp.get(i)).Retourner()) {
-                    displayblank(listtemp.get(i));
+                if(bomblist.get(listtemp.get(i)).Retourner(false)) {
+                    if(bomblist.get(listtemp.get(i)).get_value()==0) {
+                        displayblank(listtemp.get(i));
+                    }
                 }
 
             }
+        }
+    }
+
+    public void lost() {
+        System.out.println("Vraiment perdu");
+        System.out.println(countTimer);
+        for(int i=0;i<bomblist.size();i++) {
+            if((bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()==-1) || (bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()!=-1)) {
+                bomblist.get(i).setWrongFlag();
+            } else {
+                bomblist.get(i).Retourner(true);
+            }
+        }
+        btnNewGame.setVisibility(View.INVISIBLE);
+    }
+
+    public void win(){
+        System.out.println("GG MEC");
+        btnNewGame.setVisibility(View.INVISIBLE);
+    }
+
+    public void minusnbbombleft() {
+        if(nbbombleft>=1) {
+            nbbombleft--;
+        } else {
+
         }
     }
 }

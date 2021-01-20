@@ -90,38 +90,57 @@ public class Hexa extends Fragment implements View.OnClickListener {
         return neighbours;
     }
 
+    //Utilise pour ma decouverte multiple
     public boolean isRetournable() {
-       if(!_visible && _flag==0) {
-           System.out.println("cetenfoirepassetjtrsici");
+       if(!_visible && _flag==0 ) {
+           //System.out.println("cetenfoirepassetjtrsici");
            return true;
        }
        return false;
     }
 
-    public boolean Retourner() {
-        this._visible=true;
+    public void RetournerBombe() {
+        _ivMine.setImageResource(R.drawable.hexbombe);
+    }
+    public boolean Retourner(boolean finish) {
+
         switch (_value) {
             case 0:
                 _ivMine.setImageResource(R.drawable.hex0);
+                this._visible=true;   //ne pas mettre avant, le switch ne passe pas si c'est -1 (bombe)
                 return true;
             case 1:
                 _ivMine.setImageResource(R.drawable.hex1);
+                this._visible=true;
                 return true;
             case 2:
                 _ivMine.setImageResource(R.drawable.hex2);
+                this._visible=true;
                 return true;
             case 3:
                 _ivMine.setImageResource(R.drawable.hex3);
+                this._visible=true;
                 return true;
             case 4:
                 _ivMine.setImageResource(R.drawable.hex4);
+                this._visible=true;
                 return true;
             case 5:
                 _ivMine.setImageResource(R.drawable.hex5);
+                this._visible=true;
                 return true;
             case 6:
                 _ivMine.setImageResource(R.drawable.hex6);
+                this._visible=true;
                 return true;
+            case -1:
+                if(finish) {
+                    _ivMine.setImageResource(R.drawable.hexbombe);
+                    this._visible = true;
+                }
+                return false;
+            default:
+                System.err.println("etmerde " + String.valueOf(_id));
         }
         return false;
     }
@@ -157,7 +176,6 @@ public class Hexa extends Fragment implements View.OnClickListener {
                 //Ajout drapeau
                 switch (_flag) {
                     case 0:
-
                         _ivMine.setImageResource(R.drawable.hexflag);
                         _flag = 1;
                         break;
@@ -204,6 +222,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
                                 break;
                             case -1:
                                 System.out.println("Lost");
+                                activity.lost();
                                 _ivMine.setImageResource(R.drawable.hexexplose);
                         }
 
@@ -238,9 +257,20 @@ public class Hexa extends Fragment implements View.OnClickListener {
         }
     }
     public void printbombe() {
-        System.out.println("Bomb n : " + String.valueOf(_id) + "  " + String.valueOf(_row) + "   " + String.valueOf(_col) + "  IsBombe" + String.valueOf(_value));
+        System.out.println("Bomb n : " + String.valueOf(_id) + "  " + String.valueOf(_row) + "   " + String.valueOf(_col) + "  val " + String.valueOf(_value)+"  flag "+String.valueOf(_flag)+" visible "+String.valueOf(_visible));
     }
     public void setNeigbour(int n) {
         _value=n;
+    }
+
+    public int get_flag() {
+        return _flag;
+    }
+
+    public int get_value() {
+        return _value;
+    }
+    public void setWrongFlag() {
+        _ivMine.setImageResource(R.drawable.hex6);
     }
 }
