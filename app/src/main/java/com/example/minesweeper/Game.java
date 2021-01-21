@@ -257,7 +257,7 @@ public class Game extends AppCompatActivity {
             if(bestScore<timeToPlay)//Comparaison du meilleur score avec le score du joueur
             {
                 ivResult.setImageResource(R.drawable.fireworks);
-                tvScore.setText("Le meilleur score de "+Integer.toString(bestScore)+" ms est détenu par "+bestUsername);
+                tvScore.setText("Le meilleur score de "+Integer.toString(bestScore)+" s est détenu par "+bestUsername);
 
             }
             else
@@ -268,7 +268,7 @@ public class Game extends AppCompatActivity {
                 myEditor.putInt("bestScore", timeToPlay);
                 myEditor.apply();
                 ivResult.setImageResource(R.drawable.winner);
-                tvScore.setText("Bravo "+ username+" avec "+Integer.toString(timeToPlay)+" ms tu as fait le meilleur score.");
+                tvScore.setText("Bravo "+ username+" avec "+Integer.toString(timeToPlay)+" s tu as fait le meilleur score.");
             }
         }
         else
