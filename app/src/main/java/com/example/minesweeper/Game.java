@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,7 +41,6 @@ public class Game extends AppCompatActivity {
     private List<Hexa> bomblist = new ArrayList<Hexa>();
     private Dialog popup;
     private Game.Timer timer;
-    private TextView tvUsernames;
     private Boolean gameFinished=false;
     private Boolean isWin=true;
     private Integer timeToPlay=0;
@@ -59,7 +60,7 @@ public class Game extends AppCompatActivity {
         btnBackMenu=findViewById(R.id.btnBackMenu);
         tvTimer = findViewById(R.id.tvTimer);
         swMode=findViewById(R.id.swMode);
-        tvUsernames = findViewById(R.id.tvUsername);
+
         btnNewGame=findViewById(R.id.btnNewGame);
         btnNewGame.setVisibility(View.INVISIBLE);
         btntest = findViewById(R.id.button);
@@ -133,6 +134,13 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+    }
+    @Override
+    protected void onDestroy()
+    {
+        timer.cancel(true);
+        super.onDestroy();
 
     }
     private void testfunction(){
@@ -216,10 +224,13 @@ public class Game extends AppCompatActivity {
                 bomblist.get(i).setWrongFlag();
             } else {
                 bomblist.get(i).Retourner(true);
+
             }
         }
-        btnNewGame.setVisibility(View.INVISIBLE);
-        
+
+        btnNewGame.setVisibility(View.VISIBLE);
+        isWin=true;
+        gameFinished=true;
     }
 
     public void win(){
@@ -254,7 +265,8 @@ public class Game extends AppCompatActivity {
             //Recherche des meilleur score et du pseudo du joueur qui l'a fait
             SharedPreferences sharedPreferences = getDefaultSharedPreferences(getApplicationContext());
             String bestUsername = sharedPreferences.getString("bestUsername", "Guest");
-            tvUsernames.setText(bestUsername);
+            System.out.println("this is name");
+
             Integer bestScore = sharedPreferences.getInt("bestScore",timeToPlay);
 
             tvResult.setText("GAGNE");
