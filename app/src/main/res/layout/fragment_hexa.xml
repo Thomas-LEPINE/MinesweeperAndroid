@@ -6,9 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Hexa">
 
+    <Button
+        android:id="@+id/bpHexa"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF" />
+
     <ImageView
-        android:id="@+id/ivHexa"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/hexagon" />
+        android:id="@+id/ivMine"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/hexbombe" />
+
 </FrameLayout>
