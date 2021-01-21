@@ -28,16 +28,15 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 public class Game extends AppCompatActivity {
 
     private Button btnBackMenu = null;
-    private Button btnNewGame=null;
     TextView tvTimer;
 
     /* attributs */
     private int countTimer =0;
     private int difficulty;
     private int nbbomb = 75;
-    private int maxlenrow=8;
-    private int ncol=10;
-    private int nbbombleft;
+    private int lenrow=8;
+    private int lencol=10;
+    private int nbhexleft;
     private List<Hexa> bomblist = new ArrayList<Hexa>();
     private Dialog popup;
     private Game.Timer timer;
@@ -60,8 +59,7 @@ public class Game extends AppCompatActivity {
         btnBackMenu=findViewById(R.id.btnBackMenu);
         tvTimer = findViewById(R.id.tvTimer);
         swMode=findViewById(R.id.swMode);
-        btnNewGame=findViewById(R.id.btnNewGame);
-        btnNewGame.setVisibility(View.INVISIBLE);
+
         btntest = findViewById(R.id.button);
         myPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         myEditor = myPreference.edit();
@@ -89,13 +87,13 @@ public class Game extends AppCompatActivity {
         int numrow=0;
         int maxcurrow=8;
         for( int i =0; i<nbbomb;i++) {
-            if (numrow == maxcurrow) {
+            if (numrow == lenrow) {
                 numrow = 0;
                 numcol += 1;
-                if (maxcurrow == 8) {
-                    maxcurrow = 7;
+                if (lenrow == 8) {
+                    lenrow = 7;
                 } else {
-                    maxcurrow = 8;
+                    lenrow = 8;
                 }
             }
             String idtemp = "frag" + String.valueOf(i);
@@ -108,7 +106,8 @@ public class Game extends AppCompatActivity {
             // bomblist.get(i).test();
             numrow += 1;
         }
-        nbbombleft=10;
+        //difficultyNbBombes=1;
+        nbhexleft=bomblist.size()-difficultyNbBombes-1;
         generatebombes(difficultyNbBombes);
         computeneighbourbomb();
     }
@@ -142,7 +141,7 @@ public class Game extends AppCompatActivity {
         super.onDestroy();
 
     }
-    private void testfunction(){
+    private void testfunction(){ //del
         //System.out.println("Test fct");
         //System.out.println(swMode.isChecked());
         printallbombes();
@@ -154,9 +153,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void generatebombes(int n) {
-        System.out.println("generation des bombes");
         int generated=0;
-        //int[] malist = new int[n];
         Random r = new Random();
         while(generated<n){
             int temp = r.nextInt(nbbomb);
@@ -164,8 +161,6 @@ public class Game extends AppCompatActivity {
             if(!bomblist.get(temp).isBomb()){
                 generated+=1;
                 bomblist.get(temp).setBombe();
-            } else {
-
             }
         }
     }
@@ -177,7 +172,6 @@ public class Game extends AppCompatActivity {
                 c+=1;
             }
         }
-        System.out.println("Nombre de bombes :" + String.valueOf(c));
     }
 
     public void computeneighbourbomb() {
@@ -204,13 +198,8 @@ public class Game extends AppCompatActivity {
         List<Integer> listtemp;
         listtemp = bomblist.get(id).getNeighbours();
         for(int i=0;i<listtemp.size();i++) {
-            if(bomblist.get(listtemp.get(i)).isRetournable()) {
-                if(bomblist.get(listtemp.get(i)).Retourner(false)) {
-                    if(bomblist.get(listtemp.get(i)).get_value()==0) {
-                        displayblank(listtemp.get(i));
-                    }
-                }
-
+            if(bomblist.get(listtemp.get(i)).isRetournable() && bomblist.get(listtemp.get(i)).Retourner(false) && bomblist.get(listtemp.get(i)).get_value()==0 ) {
+                displayblank(listtemp.get(i));
             }
         }
     }
@@ -219,29 +208,23 @@ public class Game extends AppCompatActivity {
         System.out.println("Vraiment perdu");
         System.out.println(countTimer);
         for(int i=0;i<bomblist.size();i++) {
-            if((bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()==-1) || (bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()!=-1)) {
+            if((bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()!=-1) ) { //|| (bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()!=-1)
                 bomblist.get(i).setWrongFlag();
             } else {
                 bomblist.get(i).Retourner(true);
-
             }
         }
-
-        btnNewGame.setVisibility(View.VISIBLE);
-        isWin=true;
+        isWin=false;
         gameFinished=true;
     }
 
-    public void win(){
-        System.out.println("GG MEC");
-        btnNewGame.setVisibility(View.INVISIBLE);
-    }
-
-    public void minusnbbombleft() {
-        if(nbbombleft>=1) {
-            nbbombleft--;
+    public void minusnbhexleft() {
+        System.out.println("Nb left to discover"+String.valueOf(nbhexleft));
+        if(nbhexleft>=1) {
+            nbhexleft--;
         } else {
-
+            isWin=true;
+            gameFinished=true;
         }
     }
     public void ShowResultPopup(boolean win, int timeToPlay)
