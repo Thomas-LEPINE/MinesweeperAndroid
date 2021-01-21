@@ -67,7 +67,7 @@ public class Game extends AppCompatActivity {
         myEditor = myPreference.edit();
         popup=new Dialog(this);
         timer=new Game.Timer();
-        timer.execute(timeToPlay);
+
 
 
         //Calcul des numero de ligne et colonne et des id
@@ -105,9 +105,11 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        timer.execute(timeToPlay);
         btnBackMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //timer.cancel(true);
                 finish();
             }
         });
@@ -122,6 +124,23 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //timer.cancel(true);
+
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        timer.cancel(true);
+        super.onDestroy();
 
     }
     private void testfunction(){
@@ -299,6 +318,11 @@ public class Game extends AppCompatActivity {
                     Thread.sleep(1000);// 1000ms = 1s
                     countTimer++;
                     publishProgress(countTimer);
+                    if (isCancelled())
+                    {
+                        break;
+                    }
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
