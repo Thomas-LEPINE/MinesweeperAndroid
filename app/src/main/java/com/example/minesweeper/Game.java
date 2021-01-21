@@ -219,6 +219,7 @@ public class Game extends AppCompatActivity {
             }
         }
         btnNewGame.setVisibility(View.INVISIBLE);
+        
     }
 
     public void win(){
