@@ -6,34 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".Settings">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+    <Button
+        android:id="@+id/btnSettingsBackMenu"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@color/blueDeepWater"
+        android:text="Retour"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOnOffMusic"
+        app:layout_constraintVertical_bias="0.375" />
 
-        <Button
-            android:id="@+id/btnChangeUsername"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Changement d'utilisateur"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/white"/>
-        <Button
-            android:id="@+id/btnOnOffMusic"
-            android:layout_width="250dp"
-            android:layout_marginTop="24dp"
-            android:layout_height="wrap_content"
-            android:text="Musique OFF"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/white"/>
-        <Button
-            android:id="@+id/btnSettingsBackMenu"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Retour"
-            android:layout_marginTop="40dp"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnOnOffMusic"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/blueDeepWater"
+        android:text="Musique OFF"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnChangeUsername"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <Button
+        android:id="@+id/btnChangeUsername"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/blueDeepWater"
+        android:text="Changement d'utilisateur"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.186" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

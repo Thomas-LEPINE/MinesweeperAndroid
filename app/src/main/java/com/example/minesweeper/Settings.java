@@ -58,7 +58,6 @@ public class Settings extends AppCompatActivity {
         if(musicIsOn)
         {
             unbindService(mServiceCon);
-
         }
     }
 
