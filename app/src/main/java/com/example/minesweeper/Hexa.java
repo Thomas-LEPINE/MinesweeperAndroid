@@ -93,15 +93,11 @@ public class Hexa extends Fragment implements View.OnClickListener {
     //Utilise pour ma decouverte multiple
     public boolean isRetournable() {
        if(!_visible && _flag==0 ) {
-           //System.out.println("cetenfoirepassetjtrsici");
            return true;
        }
        return false;
     }
 
-    public void RetournerBombe() {
-        _ivMine.setImageResource(R.drawable.hexbombe);
-    }
     public boolean Retourner(boolean finish) {
 
         switch (_value) {
