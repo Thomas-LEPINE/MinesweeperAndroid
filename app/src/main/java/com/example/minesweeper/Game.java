@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -221,9 +223,13 @@ public class Game extends AppCompatActivity {
                 bomblist.get(i).setWrongFlag();
             } else {
                 bomblist.get(i).Retourner(true);
+
             }
         }
-        btnNewGame.setVisibility(View.INVISIBLE);
+
+        btnNewGame.setVisibility(View.VISIBLE);
+        isWin=true;
+        gameFinished=true;
     }
 
     public void win(){
@@ -258,6 +264,11 @@ public class Game extends AppCompatActivity {
             //Recherche des meilleur score et du pseudo du joueur qui l'a fait;
             String bestUsername = myPreference.getString("bestUsername", "Guest");
             Integer bestScore = myPreference.getInt("bestScore",timeToPlay);
+            //Recherche des meilleur score et du pseudo du joueur qui l'a fait
+            SharedPreferences sharedPreferences = getDefaultSharedPreferences(getApplicationContext());
+            System.out.println("this is name");
+
+
 
             tvResult.setText("GAGNE");
             if(bestScore<timeToPlay)//Comparaison du meilleur score avec le score du joueur
