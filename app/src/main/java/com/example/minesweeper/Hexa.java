@@ -99,7 +99,8 @@ public class Hexa extends Fragment implements View.OnClickListener {
     }
 
     public boolean Retourner(boolean finish) {
-
+        Game activity = (Game) getActivity();
+        activity.minusnbhexleft();
         switch (_value) {
             case 0:
                 _ivMine.setImageResource(R.drawable.hex0);
@@ -191,7 +192,8 @@ public class Hexa extends Fragment implements View.OnClickListener {
                     //si pas retourner on la met visible
                     //System.out.println(_value);
                     System.out.println("value : "+ String.valueOf(_value));
-
+                    activity.minusnbhexleft();
+                    //this.Retourner(false);
                     switch (_value) {
                         case 0:
                             _ivMine.setImageResource(R.drawable.hex0);
@@ -262,6 +264,6 @@ public class Hexa extends Fragment implements View.OnClickListener {
         return _value;
     }
     public void setWrongFlag() {
-        _ivMine.setImageResource(R.drawable.hex6);
+        _ivMine.setImageResource(R.drawable.hexwrongflag);
     }
 }
