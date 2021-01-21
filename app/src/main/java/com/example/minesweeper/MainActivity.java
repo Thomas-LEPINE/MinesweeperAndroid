@@ -18,39 +18,37 @@ import android.widget.Button;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
-    /* COMPOSANTS */
+    /* COMPOSANTS (attributs) */
     private Button btnGame;
     private Button btnChangeDifficulty;
     private Button btnSettings;
     private Button btnExit;
     private Button btnCredit;
     private Music musicThread;
-    protected Boolean musicIsOn=false;
+    protected Boolean musicIsOn = false;
     private SharedPreferences myPreference ;
     private SharedPreferences.Editor myEditor;
 
     /* ##### */
 
-    /* Attributs */
+    /* Attributs de la classe */
     private int difficultyNbBombes;
-    final static int NB_BOMBES_EASY = 12;
-    final static int NB_BOMBES_MEDIUM = 19;
-    final static int NB_BOMBES_HARD = 30;
+    final static int NB_BOMBES_EASY = 11;
+    final static int NB_BOMBES_MEDIUM = 18;
+    final static int NB_BOMBES_HARD = 28;
     /* ###### */
 
     //Connection au service Music
-    private ServiceConnection mServiceCon=new ServiceConnection() {
+    private ServiceConnection mServiceCon = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-
             Music.MyServiceBinder myServiceBinder= (Music.MyServiceBinder) iBinder;
             musicThread = myServiceBinder.getService();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            musicThread=null;
-
+            musicThread = null;
         }
     };
     void doBindService(){
@@ -67,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
             musicIsOn = false;
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +85,10 @@ public class MainActivity extends AppCompatActivity {
             doBindService();// Etablir une connection avec le service
             Intent music = new Intent();
             music.setClass(this, Music.class);
-            //Lancement du service Music
+            // Lancement du service Music :
             startService(music);
         }
     }
-
 
     @Override
     protected void onStart() {
@@ -100,36 +96,36 @@ public class MainActivity extends AppCompatActivity {
         btnChangeDifficulty.setOnClickListener(new View.OnClickListener() { // Bouton difficulté
             @Override
             public void onClick(View v) {
-                switch(difficultyNbBombes){
-                    case NB_BOMBES_EASY:
-                        // Facile -> normal
-                        btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_normal));
-                        difficultyNbBombes = NB_BOMBES_MEDIUM;
-                        break;
-                    case NB_BOMBES_MEDIUM:
-                        // normal -> difficile
-                        btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_difficile));
-                        difficultyNbBombes = NB_BOMBES_HARD;
-                        break;
-                    case NB_BOMBES_HARD:
-                        // difficile -> facile
-                        btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
-                        difficultyNbBombes = NB_BOMBES_EASY;
-                        break;
-                    default:
-                        // ? (bug) -> facile
-                        btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
-                        difficultyNbBombes = NB_BOMBES_EASY;
-                        break;
-                }
+            switch(difficultyNbBombes){
+                case NB_BOMBES_EASY:
+                    // Facile -> normal
+                    btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_normal));
+                    difficultyNbBombes = NB_BOMBES_MEDIUM;
+                    break;
+                case NB_BOMBES_MEDIUM:
+                    // normal -> difficile
+                    btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_difficile));
+                    difficultyNbBombes = NB_BOMBES_HARD;
+                    break;
+                case NB_BOMBES_HARD:
+                    // difficile -> facile
+                    btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
+                    difficultyNbBombes = NB_BOMBES_EASY;
+                    break;
+                default:
+                    // ? (bug) -> facile
+                    btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
+                    difficultyNbBombes = NB_BOMBES_EASY;
+                    break;
+            }
             }
         });
 
         btnCredit.setOnClickListener(new View.OnClickListener() { // Bouton crédit
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Credit.class);  //Lancer l'activité DisplayVue
-                startActivity(intent);    //Afficher la vue
+                Intent intent = new Intent(MainActivity.this, Credit.class);  // Lancer l'activité Credit
+                startActivity(intent);    // Afficher la vue de l'activité
             }
         });
 
@@ -137,13 +133,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundleGame = new Bundle();
-                Intent intentGame = new Intent(MainActivity.this, Game.class);  //Game
+                Intent intentGame = new Intent(MainActivity.this, Game.class);  // Game
                 intentGame.putExtra("difficultyNbBombes", difficultyNbBombes);
                 startActivity(intentGame);
             }
         });
-
-
 
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,32 +149,27 @@ public class MainActivity extends AppCompatActivity {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Réinitialisation des variables concernant la musique
+                // Réinitialisation des variables concernant la musique :
                 myPreference = getDefaultSharedPreferences(getApplicationContext());
                 myEditor = myPreference.edit();
                 myEditor.putBoolean("musicIsOn", true);
                 myEditor.putString("btnMusicString", "Musique OFF");
                 myEditor.apply();
-                //Supression de la connection au service
+                // Supression de la connection au service :
                 doUnbindService();
                 finishAffinity();
-                System.exit(0);
-
+                System.exit(0); // Fin de l'appli
             }
         });
 
     }
     public void onDestroy () {
         super.onDestroy();
-        //Réinitialisation des variables concernant la musique
+        // Réinitialisation des variables concernant la musique :
         myEditor.putBoolean("musicIsOn", true);
         myEditor.putString("btnMusicString", "Musique OFF");
         myEditor.apply();
-        //Supression de la connection au service
+        // Supression de la connection au service :
         doUnbindService();
-
-
     }
-
-
 }
