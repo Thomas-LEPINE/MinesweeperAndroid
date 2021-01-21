@@ -171,8 +171,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
         if (!_visible) {
             //si carte non visible
             if (activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
-            {
-                System.out.println(_flag);
+            {                System.out.println(_flag);
                 //Ajout drapeau
                 switch (_flag) {
                     case 0:
@@ -197,38 +196,34 @@ public class Hexa extends Fragment implements View.OnClickListener {
                     //System.out.println(_value);
                     System.out.println("value : "+ String.valueOf(_value));
 
-                        switch (_value) {
-                            case 0:
-                                _ivMine.setImageResource(R.drawable.hex0);
-                                activity.displayblank(_id);
-                                break;
-                            case 1:
-                                _ivMine.setImageResource(R.drawable.hex1);
-                                break;
-                            case 2:
-                                _ivMine.setImageResource(R.drawable.hex2);
-                                break;
-                            case 3:
-                                _ivMine.setImageResource(R.drawable.hex3);
-                                break;
-                            case 4:
-                                _ivMine.setImageResource(R.drawable.hex4);
-                                break;
-                            case 5:
-                                _ivMine.setImageResource(R.drawable.hex5);
-                                break;
-                            case 6:
-                                _ivMine.setImageResource(R.drawable.hex6);
-                                break;
-                            case -1:
-                                System.out.println("Lost");
-                                activity.lost();
-                                _ivMine.setImageResource(R.drawable.hexexplose);
-                        }
-
-
-
-
+                    switch (_value) {
+                        case 0:
+                            _ivMine.setImageResource(R.drawable.hex0);
+                            activity.displayblank(_id);
+                            break;
+                        case 1:
+                            _ivMine.setImageResource(R.drawable.hex1);
+                            break;
+                        case 2:
+                            _ivMine.setImageResource(R.drawable.hex2);
+                            break;
+                        case 3:
+                            _ivMine.setImageResource(R.drawable.hex3);
+                            break;
+                        case 4:
+                            _ivMine.setImageResource(R.drawable.hex4);
+                            break;
+                        case 5:
+                            _ivMine.setImageResource(R.drawable.hex5);
+                            break;
+                        case 6:
+                            _ivMine.setImageResource(R.drawable.hex6);
+                            break;
+                        case -1:
+                            System.out.println("Lost");
+                            activity.lost();
+                            _ivMine.setImageResource(R.drawable.hexexplose);
+                    }
                 }
             }
         }
@@ -240,7 +235,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
         for(int i=0;i<neighbours.size();i++){
             s+=" "+String.valueOf(neighbours.get(i))+" ";
         }
-        System.out.println(s);
+        // System.out.println(s);
     }
     public void test() {
         System.out.println("Hexa : " + String.valueOf(_row)+"   "+String.valueOf(_col)+"    "+String.valueOf(_id));

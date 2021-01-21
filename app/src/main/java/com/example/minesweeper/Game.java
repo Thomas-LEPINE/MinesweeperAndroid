@@ -70,6 +70,20 @@ public class Game extends AppCompatActivity {
         timer.execute(timeToPlay);
 
 
+        int difficultyNbBombes;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                difficultyNbBombes = 7; // Valeur par défaut
+            } else {
+                difficultyNbBombes = extras.getInt("difficultyNbBombes", 7 /* Valeur par défault*/);
+            }
+        } else {
+            difficultyNbBombes = (int) savedInstanceState.getSerializable("difficultyNbBombes");
+        }
+
+        System.out.println("difficultyNbBombes : " + String.valueOf(difficultyNbBombes));
+
         //Calcul des numero de ligne et colonne et des id
         int numcol=0;
         int numrow=0;
@@ -91,7 +105,7 @@ public class Game extends AppCompatActivity {
             hextemp.SetHexa(numcol, numrow, i);
             //Tous les fragments sont stockés dans cette liste
             bomblist.add(hextemp);
-            bomblist.get(i).test();
+            // bomblist.get(i).test();
             numrow += 1;
         }
         //bomblist.get(10).setBombe();
