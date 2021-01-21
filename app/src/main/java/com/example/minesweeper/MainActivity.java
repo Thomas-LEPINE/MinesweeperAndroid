@@ -33,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
     /* Attributs */
     private int difficultyNbBombes;
-    final static int NB_BOMBES_EASY = 12;
-    final static int NB_BOMBES_MEDIUM = 19;
-    final static int NB_BOMBES_HARD = 30;
+    final static int NB_BOMBES_EASY = 11;
+    final static int NB_BOMBES_MEDIUM = 18;
+    final static int NB_BOMBES_HARD = 28;
     /* ###### */
 
     //Connection au service Music
-    private ServiceConnection mServiceCon=new ServiceConnection() {
+    private ServiceConnection mServiceCon = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
 
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             musicThread=null;
-
         }
     };
     void doBindService(){
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             musicIsOn = false;
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,9 +176,5 @@ public class MainActivity extends AppCompatActivity {
         myEditor.apply();
         //Supression de la connection au service
         doUnbindService();
-
-
     }
-
-
 }

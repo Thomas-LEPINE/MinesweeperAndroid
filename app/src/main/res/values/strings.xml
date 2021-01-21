@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MineSweeper</string>
+    <string name="app_name">LE DÉMINEUR</string>
     <string name="new_game">Nouvelle Partie</string>
     <string name="difficulty">Difficulté :</string>
     <string name="difficulty_easy">Facile</string>
