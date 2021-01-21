@@ -60,7 +60,6 @@ public class Game extends AppCompatActivity {
         btnBackMenu=findViewById(R.id.btnBackMenu);
         tvTimer = findViewById(R.id.tvTimer);
         swMode=findViewById(R.id.swMode);
-
         btnNewGame=findViewById(R.id.btnNewGame);
         btnNewGame.setVisibility(View.INVISIBLE);
         btntest = findViewById(R.id.button);
@@ -262,12 +261,14 @@ public class Game extends AppCompatActivity {
         timer.cancel(true);//arrêt du timer
 
         if(win ==true) {//si le joueur à gagner la partie
+            //Recherche des meilleur score et du pseudo du joueur qui l'a fait;
+            String bestUsername = myPreference.getString("bestUsername", "Guest");
+            Integer bestScore = myPreference.getInt("bestScore",timeToPlay);
             //Recherche des meilleur score et du pseudo du joueur qui l'a fait
             SharedPreferences sharedPreferences = getDefaultSharedPreferences(getApplicationContext());
-            String bestUsername = sharedPreferences.getString("bestUsername", "Guest");
             System.out.println("this is name");
 
-            Integer bestScore = sharedPreferences.getInt("bestScore",timeToPlay);
+
 
             tvResult.setText("GAGNE");
             if(bestScore<timeToPlay)//Comparaison du meilleur score avec le score du joueur
@@ -278,8 +279,7 @@ public class Game extends AppCompatActivity {
             }
             else
             {
-                String username = sharedPreferences.getString("username", "Guest");
-                myPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String username = myPreference.getString("username", "Guest");
                 myEditor = myPreference.edit();
                 myEditor.putString("bestUsername", username);
                 myEditor.putInt("bestScore", timeToPlay);
