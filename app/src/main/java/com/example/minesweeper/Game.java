@@ -74,7 +74,7 @@ public class Game extends AppCompatActivity {
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
-                difficultyNbBombes = 7; // Valeur par défaut
+                difficultyNbBombes = 10; // Valeur par défaut
             } else {
                 difficultyNbBombes = extras.getInt("difficultyNbBombes", 7 /* Valeur par défault*/);
             }

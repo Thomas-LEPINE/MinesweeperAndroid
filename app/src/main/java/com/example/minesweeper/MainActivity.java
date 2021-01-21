@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     /* Attributs */
     private int difficultyNbBombes;
     final static int NB_BOMBES_EASY = 12;
-    final static int NB_BOMBES_MEDIUM = 22;
+    final static int NB_BOMBES_MEDIUM = 19;
     final static int NB_BOMBES_HARD = 30;
     /* ###### */
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         // La difficultée est mise à facile au début
         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
-        difficultyNbBombes = 7;
+        difficultyNbBombes = NB_BOMBES_EASY;
 
         //Verification que le service n'a  pas été lancé
         if(Music.serviceIsRunning==false) {
