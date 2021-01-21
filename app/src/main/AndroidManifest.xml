@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Credit" />
 
         <service
             android:name=".Timer"
@@ -18,9 +17,9 @@
 
         <service android:name=".Music" android:enabled="true" />
 
-        <activity android:name=".DebutDePartie" />
         <activity android:name=".Settings" />
         <activity android:name=".Game" />
+        <activity android:name=".Credit" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
