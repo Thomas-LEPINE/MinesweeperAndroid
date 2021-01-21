@@ -135,6 +135,13 @@ public class Game extends AppCompatActivity {
         super.onResume();
 
     }
+    @Override
+    protected void onDestroy()
+    {
+        timer.cancel(true);
+        super.onDestroy();
+
+    }
     private void testfunction(){
         //System.out.println("Test fct");
         //System.out.println(swMode.isChecked());
