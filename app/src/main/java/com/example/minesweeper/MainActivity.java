@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bundleGame = new Bundle();
                 Intent intentGame = new Intent(MainActivity.this, Game.class);  //Game
-                // intentGame.putExtras(bundleGame.putString(difficulty, int));
+                //intentGame.putExtras(bundleGame.putString(difficulty, int));
                 startActivity(intentGame);
             }
         });
