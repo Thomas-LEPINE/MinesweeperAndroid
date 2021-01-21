@@ -6,7 +6,7 @@
     android:layout_width="350dp"
     android:layout_height="350dp"
     android:orientation="vertical"
-    android:background="@color/gray"
+    android:background="@color/blueWater"
     android:padding="5dp"
     android:layout_gravity="center"
     >
@@ -23,10 +23,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
-            android:textSize="38sp"
-            android:textColor="@color/white"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/grayBomb"
+            android:textSize="38sp" />
 
         <ImageView
             android:id="@+id/ivResult"
@@ -40,10 +40,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
             android:gravity="center"
             android:text="TextView"
-            android:textColor="@color/white"
-            android:layout_margin="5dp"
+            android:textColor="@color/grayBomb"
             android:textSize="22sp" />
 
         <Button
@@ -51,9 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorPrimaryDark"
-            android:padding="5dp"
             android:layout_margin="5dp"
+            android:background="@color/blueDeepWater"
+            android:padding="5dp"
             android:text="Retour au menu"
             android:textColor="@color/white" />
     </LinearLayout>
