@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     /* Attributs */
     private int difficultyNbBombes;
+    final static int NB_BOMBES_EASY = 12;
+    final static int NB_BOMBES_MEDIUM = 22;
+    final static int NB_BOMBES_HARD = 30;
     /* ###### */
 
     //Connection au service Music
@@ -105,22 +108,22 @@ public class MainActivity extends AppCompatActivity {
                     case 7:
                         // Facile -> normal
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_normal));
-                        difficultyNbBombes = 15;
+                        difficultyNbBombes = NB_BOMBES_MEDIUM;
                         break;
                     case 15:
                         // normal -> difficile
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_difficile));
-                        difficultyNbBombes = 22;
+                        difficultyNbBombes = NB_BOMBES_HARD;
                         break;
                     case 22:
                         // difficile -> facile
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
-                        difficultyNbBombes = 7;
+                        difficultyNbBombes = NB_BOMBES_EASY;
                         break;
                     default:
                         // ? (bug) -> facile
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
-                        difficultyNbBombes = 7;
+                        difficultyNbBombes = NB_BOMBES_EASY;
                         break;
                 }
             }

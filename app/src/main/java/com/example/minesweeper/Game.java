@@ -108,11 +108,8 @@ public class Game extends AppCompatActivity {
             // bomblist.get(i).test();
             numrow += 1;
         }
-        //bomblist.get(10).setBombe();
-        //bomblist.get(11).setBombe();
-        //bomblist.get(12).setBombe();
         nbbombleft=10;
-        generatebombes(10);
+        generatebombes(difficultyNbBombes);
         computeneighbourbomb();
     }
 
