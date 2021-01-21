@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -46,6 +48,8 @@ public class Game extends AppCompatActivity {
     private SharedPreferences myPreference ;
     private SharedPreferences.Editor myEditor;
 
+    private ImageView ivtest=null;
+
     /* ###### */
 
     private Switch swMode;
@@ -59,6 +63,7 @@ public class Game extends AppCompatActivity {
         btnBackMenu=findViewById(R.id.btnBackMenu);
         tvTimer = findViewById(R.id.tvTimer);
         swMode=findViewById(R.id.swMode);
+
 
         btntest = findViewById(R.id.button);
         myPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
