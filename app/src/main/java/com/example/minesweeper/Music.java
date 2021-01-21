@@ -9,6 +9,7 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 
 public class Music extends Service {
+    /* COMPOSANTS */
     private MediaPlayer mp;
     private final IBinder mBinder=new MyServiceBinder();
     public static Boolean serviceIsRunning = false;
@@ -38,7 +39,6 @@ public class Music extends Service {
             mp.setLooping(true);//musique jouée en boucle
             mp.setVolume(100, 100);
         }
-
     }
 
     @Override
@@ -48,12 +48,12 @@ public class Music extends Service {
         mp.start();
         return START_NOT_STICKY;//Ne pas relancer le service une fois kill
     }
+
     public void pauseMusic()
     {
         if(mp.isPlaying())
         {
             mp.pause();
-
         }
     }
 
@@ -65,12 +65,9 @@ public class Music extends Service {
         }
     }
 
-    public void stopMusic()
-    {if(mp.isPlaying()) {
-        mp.stop();
-        mp.release();
-        mp = null;
-    }
+    public Boolean isMusicPlaying()
+    {
+        return mp.isPlaying();
     }
 
     @Override
@@ -88,10 +85,4 @@ public class Music extends Service {
             }
         }
     }
-
-    public Boolean isMusicPlaying()
-    {
-        return mp.isPlaying();
-    }
-
 }
