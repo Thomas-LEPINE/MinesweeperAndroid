@@ -5,27 +5,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.content.ServiceConnection;
+
 import android.os.IBinder;
+
 import android.view.View;
 import android.widget.Button;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
-
     /* COMPOSANTS */
     private Button btnGame;
     private Button btnChangeDifficulty;
     private Button btnSettings;
     private Button btnExit;
     private Button btnCredit;
+
+    private Button btnScore;
+
     private Music musicThread;
     protected Boolean musicIsOn=false;
     private SharedPreferences myPreference ;
     private SharedPreferences.Editor myEditor;
+
     /* ##### */
 
     /* Attributs */
@@ -72,10 +78,12 @@ public class MainActivity extends AppCompatActivity {
         btnSettings = (Button) findViewById(R.id.btnSetings);
         btnExit = (Button) findViewById(R.id.btnExit);
         btnCredit = (Button) findViewById(R.id.btnCredit);
+        btnScore = (Button) findViewById(R.id.btnScore);
 
         // La difficultée est mise à facile au début
         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
         difficulty = 0;
+
         //Verification que le service n'a  pas été lancé
         if(Music.serviceIsRunning==false) {
             doBindService();// Etablir une connection avec le service
@@ -84,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             //Lancement du service Music
             startService(music);
         }
+
     }
 
 
@@ -136,6 +145,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        btnScore.setOnClickListener(new View.OnClickListener() { // Bouton crédit
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ScoreBoard.class);  //Lancer l'activité DisplayVue
+                startActivity(intent);    //Afficher la vue
+            }
+        });
+
+
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         myEditor.apply();
         //Supression de la connection au service
         doUnbindService();
+
 
     }
 
