@@ -105,17 +105,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch(difficultyNbBombes){
-                    case 7:
+                    case NB_BOMBES_EASY:
                         // Facile -> normal
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_normal));
                         difficultyNbBombes = NB_BOMBES_MEDIUM;
                         break;
-                    case 15:
+                    case NB_BOMBES_MEDIUM:
                         // normal -> difficile
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_difficile));
                         difficultyNbBombes = NB_BOMBES_HARD;
                         break;
-                    case 22:
+                    case NB_BOMBES_HARD:
                         // difficile -> facile
                         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
                         difficultyNbBombes = NB_BOMBES_EASY;
