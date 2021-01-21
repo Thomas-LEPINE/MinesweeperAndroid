@@ -310,6 +310,9 @@ public class Game extends AppCompatActivity {
                     Thread.sleep(1000);// 1000ms = 1s
                     countTimer++;
                     publishProgress(countTimer);
+                    if (isCancelled()) {
+                        break;
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
