@@ -34,8 +34,8 @@ public class Credit extends AppCompatActivity {
         Animation animtranslate = AnimationUtils.loadAnimation(this, R.anim.translate);
         Animation animtranslatescaling = AnimationUtils.loadAnimation(this, R.anim.translatescaling);
         _ivAnim1.startAnimation(animrotate);
-        _ivAnim2.startAnimation(animscale);
-        _ivAnim3.startAnimation(animtranslatescaling);
+        _ivAnim2.startAnimation(animtranslatescaling);
+        _ivAnim3.startAnimation(animscale);
 
 
     }
