@@ -9,20 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-
-
-
-
-        <service
-            android:name=".Timer"
-            android:enabled="true"
-            android:exported="true" />
         <service
             android:name=".Music"
             android:enabled="true" />
-
         <activity android:name=".Settings" />
         <activity android:name=".Game" />
         <activity android:name=".Credit" />
@@ -34,5 +23,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
