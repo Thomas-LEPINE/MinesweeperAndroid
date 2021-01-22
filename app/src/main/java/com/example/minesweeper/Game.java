@@ -19,9 +19,13 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -45,6 +49,9 @@ public class Game extends AppCompatActivity {
     private Integer timeToPlay=0;
     private SharedPreferences myPreference ;
     private SharedPreferences.Editor myEditor;
+    private SharedPreferences prefscores;
+    private SharedPreferences.Editor editorscore;
+
 
     private ImageView ivtest=null;
 
@@ -63,6 +70,8 @@ public class Game extends AppCompatActivity {
 
         myPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         myEditor = myPreference.edit();
+
+
         popup=new Dialog(this);
         timer=new Game.Timer();
         timer.execute(timeToPlay);
@@ -242,6 +251,30 @@ public class Game extends AppCompatActivity {
                 ivResult.setImageResource(R.drawable.winner);
                 tvScore.setText("Bravo "+ username+" avec "+Integer.toString(timeToPlay)+" s tu as fait le meilleur score.");
             }
+            prefscores = getSharedPreferences("MY_PREFS_NAME",MODE_PRIVATE);
+            editorscore = prefscores.edit();
+
+            //Ajout du score dans 'historique
+            Gson gson = new Gson();
+            //Recuperation des scores précédents
+            String json = prefscores.getString("ListScores","empty");
+            List<Scores> list =null;
+            //Si la liste est vide ou la récupère, sinon on la créer
+            if(json!="empty") {
+                 list = gson.fromJson(json, new TypeToken<ArrayList<Scores>>() {}.getType());
+
+            } else {
+                list = new ArrayList<Scores>();
+            }
+            //création du nouveau Scores
+            Scores newscore = new Scores(myPreference.getString("username", "Guest"),timeToPlay);
+            list.add(newscore);
+            //Trie en fonction du temps
+            Collections.sort(list, new ScoresTempsComparator());
+            //Ajout dans les sharedpreferences
+            String jsonwriter = gson.toJson(list);
+            editorscore.putString("ListScores",jsonwriter);
+            editorscore.apply();
         }
         else
         {
@@ -300,3 +333,4 @@ public class Game extends AppCompatActivity {
         }
     }
 }
+
