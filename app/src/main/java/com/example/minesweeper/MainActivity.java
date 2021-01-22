@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     final static int NB_BOMBES_HARD = 28;
     /* ###### */
 
+
+    private Button score;
     //Connection au service Music
     private ServiceConnection mServiceCon = new ServiceConnection() {
         @Override
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         btnSettings = (Button) findViewById(R.id.btnSetings);
         btnExit = (Button) findViewById(R.id.btnExit);
         btnCredit = (Button) findViewById(R.id.btnCredit);
-
+        score=findViewById(R.id.btnScore);
         // La difficultée est mise à facile au début
         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
         difficultyNbBombes = NB_BOMBES_EASY;
@@ -118,6 +120,13 @@ public class MainActivity extends AppCompatActivity {
                     difficultyNbBombes = NB_BOMBES_EASY;
                     break;
             }
+            }
+        });
+        score.setOnClickListener(new View.OnClickListener() { // Bouton crédit
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ScoreBoard.class);  // Lancer l'activité Credit
+                startActivity(intent);    // Afficher la vue de l'activité
             }
         });
 
