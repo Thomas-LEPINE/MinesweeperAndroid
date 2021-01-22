@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSettings;
     private Button btnExit;
     private Button btnCredit;
+    private Button btnScore;
     private Music musicThread;
     protected Boolean musicIsOn = false;
     private SharedPreferences myPreference ;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         btnSettings = (Button) findViewById(R.id.btnSetings);
         btnExit = (Button) findViewById(R.id.btnExit);
         btnCredit = (Button) findViewById(R.id.btnCredit);
+        btnScore = (Button) findViewById(R.id.btnScore);
 
         // La difficultée est mise à facile au début
         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
@@ -143,6 +145,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Settings.class));
+            }
+        });
+        btnScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Score.class));
             }
         });
 
