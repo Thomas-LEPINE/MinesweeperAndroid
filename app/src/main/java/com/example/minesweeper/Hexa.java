@@ -24,21 +24,17 @@ public class Hexa extends Fragment implements View.OnClickListener {
     private int _col;
     private boolean _visible;  //Si retourner ou non; true visible
     private int _id;
-    private int _flag;
+    private int _flag;   //0 normal, 1 drapeau, 2 point d'interogation
     private int _value;  //-1 est une bombe; entre 0 et 6 le nombre de bombes a cote
     private boolean _isbomb;
     private List<Integer> neighbours = new ArrayList<Integer>();
-    private ImageView _ivMine;
-    private Button _bpHexa;
+    private ImageView _ivMine;  //Image affiche
+    private Button _bpHexa;  //Bouton du fragment
     private View v;
 
 
     public Hexa() {
         // Required empty public constructor
-    }
-
-    public int get_id() {
-        return _id;
     }
 
     public void SetHexa(int r, int c, int i) {
@@ -48,101 +44,9 @@ public class Hexa extends Fragment implements View.OnClickListener {
         this._visible=false;
         this._value=-4;
         this._flag=0;
-
+        //Calcul des id des voisins
         computeNeighbour();
     }
-    public void computeNeighbour() {
-        int[] offset={-8,-7,-1,1,7,8};
-        if(_row==0) {
-            offset[0]=0;
-            offset[1]=0;
-        }
-        if(_row==9) {
-            offset[4]=0;
-            offset[5]=0;
-        }
-        if(_col==0) {
-            if(_row%2==0){
-                offset[0]=0;
-                offset[2]=0;
-                offset[4]=0;
-            } else {
-                offset[2] = 0;
-            }
-        }
-        if(_col==7) {
-            offset[1]=0;
-            offset[3]=0;
-            offset[5]=0;
-        }
-        if(_col==6 & _row%2==1) {
-            offset[3] = 0;
-        }
-        for(int i=0;i<6;i++) {
-            if(offset[i]!=0){
-                int rank=_id+offset[i];
-                neighbours.add(rank);
-            }
-        }
-    }
-
-    public List<Integer> getNeighbours() {
-        return neighbours;
-    }
-
-    //Utilise pour ma decouverte multiple
-    public boolean isRetournable() {
-       if(!_visible && _flag==0 ) {
-           return true;
-       }
-       return false;
-    }
-
-    public boolean Retourner(boolean finish) {
-        Game activity = (Game) getActivity();
-        activity.minusnbhexleft();
-        switch (_value) {
-            case 0:
-                _ivMine.setImageResource(R.drawable.hex0);
-                this._visible=true;   //ne pas mettre avant, le switch ne passe pas si c'est -1 (bombe)
-                return true;
-            case 1:
-                _ivMine.setImageResource(R.drawable.hex1);
-                this._visible=true;
-                return true;
-            case 2:
-                _ivMine.setImageResource(R.drawable.hex2);
-                this._visible=true;
-                return true;
-            case 3:
-                _ivMine.setImageResource(R.drawable.hex3);
-                this._visible=true;
-                return true;
-            case 4:
-                _ivMine.setImageResource(R.drawable.hex4);
-                this._visible=true;
-                return true;
-            case 5:
-                _ivMine.setImageResource(R.drawable.hex5);
-                this._visible=true;
-                return true;
-            case 6:
-                _ivMine.setImageResource(R.drawable.hex6);
-                this._visible=true;
-                return true;
-            case -1:
-                if(finish) {
-                    _ivMine.setImageResource(R.drawable.hexbombe);
-                    this._visible = true;
-                }
-                return false;
-            default:
-                System.err.println("etmerde " + String.valueOf(_id));
-        }
-        return false;
-    }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -151,24 +55,20 @@ public class Hexa extends Fragment implements View.OnClickListener {
 
         _ivMine=v.findViewById(R.id.ivMine);
         _ivMine.setImageResource(R.drawable.hexwater);
-        //Ajout d'un listener sur l'hexagone
+
         _bpHexa=(Button) v.findViewById(R.id.bpHexa);
         _bpHexa.setOnClickListener(this);
         return v;
     }
 
-
     //@Override
     public void onClick(View v) {
-        //Ici le code quand on click sur chaque hexagone
-        //System.out.println(this);
-        //this.displayneighbor();
+        //Recupere l'activity game
         Game activity = (Game) getActivity();
-        System.out.println(activity.getStateSwitch());
+        //si carte non visible/retourner
         if (!_visible) {
-            //si carte non visible
             if (activity.getStateSwitch()) //si vrai = on met des drapeaux;   si faux = on découvre les bombes
-            {                System.out.println(_flag);
+            {
                 //Ajout drapeau
                 switch (_flag) {
                     case 0:
@@ -186,17 +86,16 @@ public class Hexa extends Fragment implements View.OnClickListener {
                 }
             } else {
                 //on decouvre
-                System.out.println("There");
                 if (this._flag == 0) {  //on verifie quil n'y a pas de drapeau ou ?
-                    this._visible = true;
                     //si pas retourner on la met visible
-                    //System.out.println(_value);
-                    System.out.println("value : "+ String.valueOf(_value));
+                    this._visible = true;
+                    //Dminue le nombre de cases restantes à découvrir
                     activity.minusnbhexleft();
-                    //this.Retourner(false);
+                    //En fonction du nombre de bombe à coté, on met l'image en correspondance
                     switch (_value) {
                         case 0:
                             _ivMine.setImageResource(R.drawable.hex0);
+                            //Si pas de bombe voisine, on lance la decouverte des autres cases vides
                             activity.displayblank(_id);
                             break;
                         case 1:
@@ -218,7 +117,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
                             _ivMine.setImageResource(R.drawable.hex6);
                             break;
                         case -1:
-                            System.out.println("Lost");
+                            //Si _value=-1 alors c'est une bombe, on déclanche le défaite
                             activity.lost();
                             _ivMine.setImageResource(R.drawable.hexexplose);
                     }
@@ -227,20 +126,7 @@ public class Hexa extends Fragment implements View.OnClickListener {
         }
     }
 
-
-    public void displayneighbor(){
-        String s=String.valueOf(_id)+" has ";
-        for(int i=0;i<neighbours.size();i++){
-            s+=" "+String.valueOf(neighbours.get(i))+" ";
-        }
-        // System.out.println(s);
-    }
-    public void test() {
-        System.out.println("Hexa : " + String.valueOf(_row)+"   "+String.valueOf(_col)+"    "+String.valueOf(_id));
-    }
-    public void setBombe() {
-        this._value=-1;
-    }
+    //Retourne si c'est une bombe
     public boolean isBomb()
     {
         if(_value==-1){
@@ -249,11 +135,19 @@ public class Hexa extends Fragment implements View.OnClickListener {
             return false;
         }
     }
-    public void printbombe() {
-        System.out.println("Bomb n : " + String.valueOf(_id) + "  " + String.valueOf(_row) + "   " + String.valueOf(_col) + "  val " + String.valueOf(_value)+"  flag "+String.valueOf(_flag)+" visible "+String.valueOf(_visible));
+
+    //Utilise pour ma decouverte multiple
+    public boolean isRetournable() {
+        //Si non visble et que c'est une case vide
+        if(!_visible && _flag==0 ) {
+            return true;
+        }
+        return false;
     }
-    public void setNeigbour(int n) {
-        _value=n;
+
+    //Retourne la liste des ID des voisins
+    public List<Integer> getNeighbours() {
+        return neighbours;
     }
 
     public int get_flag() {
@@ -263,7 +157,117 @@ public class Hexa extends Fragment implements View.OnClickListener {
     public int get_value() {
         return _value;
     }
+
     public void setWrongFlag() {
         _ivMine.setImageResource(R.drawable.hexwrongflag);
+    }
+
+    public void setBombe() {
+        this._value=-1;
+    }
+
+    public void setNeigbour(int n) {
+        _value=n;
+    }
+
+    //Calcul des id des voisins
+    public void computeNeighbour() {
+        //offset est le tableau des voisins possible, un fragment a 6 voisins possile. En fonction de chaque id de chaque fragment, il faut additioner l'id avec l'offset our avoir les voisins
+        //ensuite on verifie chaque conditions pour que l'id calculé soit valides
+        int[] offset={-8,-7,-1,1,7,8};
+        //Si fragment sur ligne du haut
+        if(_row==0) {
+            offset[0]=0;
+            offset[1]=0;
+        }
+        //Si fragment sur ligne du bas
+        if(_row==9) {
+            offset[4]=0;
+            offset[5]=0;
+        }
+        //Si fragment sur le bords gauche
+        if(_col==0) {
+            //Si fragment sur le bords gauche "interieur"
+            if(_row%2==0){
+                offset[0]=0;
+                offset[2]=0;
+                offset[4]=0;
+            } else { //Si fragment sur le bords gauche "extérieur"
+                offset[2] = 0;
+            }
+        }
+        //Si fragment sur le bords droit "interieur"
+        if(_col==7) {
+            offset[1]=0;
+            offset[3]=0;
+            offset[5]=0;
+        }
+        //Si fragment sur le bords doit "exterieur" et sur une ligne ou il y a 7 bombe, pas 8
+        if(_col==6 & _row%2==1) {
+            offset[3] = 0;
+        }
+        //On parcours toutes la listes des offset possible
+        for(int i=0;i<6;i++) {
+            //Si l'offset n'as pas ete mis a 0
+            if(offset[i]!=0){
+                //On calcul l'id et l'ajoute en voisin
+                int rank=_id+offset[i];
+                neighbours.add(rank);
+            }
+        }
+    }
+
+    //Dans le cas des découvertes de multiples case
+    //Si finish, alors on retourne tous
+    //Sinon retourne les autres sasn declancher la decouverte multiple
+    //La fonction return false si il ne faut pas reexecuter la fonction "displaybalnk"
+    public boolean Retourner(boolean finish) {
+        Game activity = (Game) getActivity();
+        switch (_value) {
+            case 0:
+                _ivMine.setImageResource(R.drawable.hex0);
+                activity.minusnbhexleft();
+                this._visible=true;   //ne pas mettre avant, le switch ne passe pas si c'est -1 (bombe)
+                return true;
+            case 1:
+                _ivMine.setImageResource(R.drawable.hex1);
+                activity.minusnbhexleft();
+                this._visible=true;
+                return true;
+            case 2:
+                _ivMine.setImageResource(R.drawable.hex2);
+                activity.minusnbhexleft();
+                this._visible=true;
+                return true;
+            case 3:
+                _ivMine.setImageResource(R.drawable.hex3);
+                activity.minusnbhexleft();
+                this._visible=true;
+                return true;
+            case 4:
+                _ivMine.setImageResource(R.drawable.hex4);
+                activity.minusnbhexleft();
+                this._visible=true;
+                return true;
+            case 5:
+                _ivMine.setImageResource(R.drawable.hex5);
+                activity.minusnbhexleft();
+                this._visible=true;
+                return true;
+            case 6:
+                _ivMine.setImageResource(R.drawable.hex6);
+                activity.minusnbhexleft();
+                this._visible=true;
+                return true;
+            case -1:
+                if(finish) {
+                    _ivMine.setImageResource(R.drawable.hexbombe);
+                    this._visible = true;
+                }
+                return false;
+            default:
+                break;
+        }
+        return false;
     }
 }

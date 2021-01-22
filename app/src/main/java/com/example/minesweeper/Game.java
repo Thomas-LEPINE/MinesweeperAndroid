@@ -34,10 +34,8 @@ public class Game extends AppCompatActivity {
 
     /* attributs */
     private int countTimer =0;
-    private int difficulty;
     private int nbbomb = 75;
     private int lenrow=8;
-    private int lencol=10;
     private int nbhexleft;
     private List<Hexa> bomblist = new ArrayList<Hexa>();
     private Dialog popup;
@@ -53,25 +51,21 @@ public class Game extends AppCompatActivity {
     /* ###### */
 
     private Switch swMode;
-    Bundle data = new Bundle();
-    private Button btntest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
         btnBackMenu=findViewById(R.id.btnBackMenu);
         tvTimer = findViewById(R.id.tvTimer);
         swMode=findViewById(R.id.swMode);
 
-
-        btntest = findViewById(R.id.button);
         myPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         myEditor = myPreference.edit();
         popup=new Dialog(this);
         timer=new Game.Timer();
         timer.execute(timeToPlay);
-
 
         int difficultyNbBombes;
         if (savedInstanceState == null) {
@@ -85,12 +79,9 @@ public class Game extends AppCompatActivity {
             difficultyNbBombes = (int) savedInstanceState.getSerializable("difficultyNbBombes");
         }
 
-        System.out.println("difficultyNbBombes : " + String.valueOf(difficultyNbBombes));
-
         //Calcul des numero de ligne et colonne et des id
         int numcol=0;
         int numrow=0;
-        int maxcurrow=8;
         for( int i =0; i<nbbomb;i++) {
             if (numrow == lenrow) {
                 numrow = 0;
@@ -101,17 +92,16 @@ public class Game extends AppCompatActivity {
                     lenrow = 8;
                 }
             }
+            //Recuperation du nom du fragment ex : frag12
             String idtemp = "frag" + String.valueOf(i);
             int intidtemp = getResources().getIdentifier(idtemp, "id", getPackageName());
-            //System.out.println(String.valueOf(numrow)+"   "+String.valueOf(numcol));
             Hexa hextemp = (Hexa) getSupportFragmentManager().findFragmentById(intidtemp);
             hextemp.SetHexa(numcol, numrow, i);
             //Tous les fragments sont stockés dans cette liste
             bomblist.add(hextemp);
-            // bomblist.get(i).test();
             numrow += 1;
         }
-        //difficultyNbBombes=1;
+        //nombre de case restante a découvrir
         nbhexleft=bomblist.size()-difficultyNbBombes-1;
         generatebombes(difficultyNbBombes);
         computeneighbourbomb();
@@ -126,69 +116,46 @@ public class Game extends AppCompatActivity {
                 finish();
             }
         });
-        btntest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                testfunction();
-            }
-        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
     @Override
     protected void onDestroy()
     {
         timer.cancel(true);
         super.onDestroy();
-
-    }
-    private void testfunction(){ //del
-        //System.out.println("Test fct");
-        //System.out.println(swMode.isChecked());
-        printallbombes();
-
     }
 
+    //Recupere l'état du switch mode, soit en mode decouverte soit en mode drapeau
     public boolean getStateSwitch() {
        return swMode.isChecked();
     }
 
+    //Generation aléatoire des bombes
     public void generatebombes(int n) {
         int generated=0;
         Random r = new Random();
         while(generated<n){
             int temp = r.nextInt(nbbomb);
-            System.out.println(generated);
             if(!bomblist.get(temp).isBomb()){
                 generated+=1;
                 bomblist.get(temp).setBombe();
             }
         }
     }
-    public void printallbombes() {
-        int c=0;
-        for(int i=0; i<nbbomb;i++) {
-           bomblist.get(i).printbombe();
-            if(!bomblist.get(i).isBomb()){
-                c+=1;
-            }
-        }
-    }
 
+    //Calcul pour chaque fragment, le nombre de bombe avoisinante
     public void computeneighbourbomb() {
         List<Integer> listtemp;
-        System.out.println("computing bombes");
         for(int i=0;i<nbbomb;i++) {
             if (!bomblist.get(i).isBomb()) {
                 listtemp = bomblist.get(i).getNeighbours();
                 int c = 0;
                 for (int j = 0; j < listtemp.size(); j++) {
                     if (bomblist.get(listtemp.get(j)).isBomb()) {
-                        System.out.println(String.valueOf(listtemp.get(j)) + " is a bombe");
                         c++;
                     }
                 }
@@ -197,8 +164,9 @@ public class Game extends AppCompatActivity {
         }
     }
 
-
-
+    //Retourner l'ensemble des fragments n'ayant pas de voisin en bombes, ou les fragments ayant pour voisin un fragment n'ayant un fragment n'ayant pas de bombe en voisin
+    //On commence sur le fragment clické, et on retourne ses voisins si il respect les conditions
+    //Si le voisin est retourné, alors on fait la même chose a ses voisins (appel récursif)
     public void displayblank(int id) {
         List<Integer> listtemp;
         listtemp = bomblist.get(id).getNeighbours();
@@ -210,28 +178,31 @@ public class Game extends AppCompatActivity {
     }
 
     public void lost() {
-        System.out.println("Vraiment perdu");
-        System.out.println(countTimer);
+        //On retourne tous les fragments
         for(int i=0;i<bomblist.size();i++) {
-            if((bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()!=-1) ) { //|| (bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()!=-1)
+            if((bomblist.get(i).get_flag()!=0 && bomblist.get(i).get_value()!=-1) ) {
+                //Si un drapeau est placé alors que ce n'est pas une bombe
                 bomblist.get(i).setWrongFlag();
             } else {
                 bomblist.get(i).Retourner(true);
             }
         }
+        //Fin de partie
         isWin=false;
         gameFinished=true;
     }
 
+    //A chasue case découverte,diminution du nombre de case restant a découvrire
     public void minusnbhexleft() {
-        System.out.println("Nb left to discover"+String.valueOf(nbhexleft));
         if(nbhexleft>=1) {
             nbhexleft--;
         } else {
+            //Si plus de cases a découvrir, alors vistoire
             isWin=true;
             gameFinished=true;
         }
     }
+
     public void ShowResultPopup(boolean win, int timeToPlay)
     {
         /* COMPOSANTS */
@@ -254,16 +225,12 @@ public class Game extends AppCompatActivity {
             Integer bestScore = myPreference.getInt("bestScore",timeToPlay);
             //Recherche des meilleur score et du pseudo du joueur qui l'a fait
             SharedPreferences sharedPreferences = getDefaultSharedPreferences(getApplicationContext());
-            System.out.println("this is name");
-
-
 
             tvResult.setText("GAGNE");
             if(bestScore<timeToPlay)//Comparaison du meilleur score avec le score du joueur
             {
                 ivResult.setImageResource(R.drawable.fireworks);
                 tvScore.setText("Le meilleur score de "+Integer.toString(bestScore)+" s est détenu par "+bestUsername);
-
             }
             else
             {
@@ -287,12 +254,12 @@ public class Game extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Game.this, MainActivity.class);  //Lancer l'activité MainActivity
                 startActivity(intent);    //Afficher la vue
-
             }
         });
         popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popup.show();//affichage de la popup
     }
+
     //Timer
     private class Timer extends AsyncTask< Integer, Integer, Integer> {
         private int countTimer;
@@ -330,7 +297,6 @@ public class Game extends AppCompatActivity {
         protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
             ShowResultPopup(isWin, result);//Affichage de la popup
-
         }
     }
 }
