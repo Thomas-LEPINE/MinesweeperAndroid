@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     /* Attributs de la classe */
     private int difficultyNbBombes;
-    final static int NB_BOMBES_EASY = 11;
+    final static int NB_BOMBES_EASY = 10;
     final static int NB_BOMBES_MEDIUM = 18;
     final static int NB_BOMBES_HARD = 28;
     /* ###### */
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         btnChangeDifficulty.setText(getString(R.string.difficulty) + " " + getString(R.string.difficulty_easy));
         difficultyNbBombes = NB_BOMBES_EASY;
 
-        //Verification que le service n'a  pas été lancé
+        //Verification que le service n'a pas été lancé
         if(Music.serviceIsRunning==false) {
             doBindService();// Etablir une connection avec le service
             Intent music = new Intent();
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 myEditor.putBoolean("musicIsOn", true);
                 myEditor.putString("btnMusicString", "Musique OFF");
                 myEditor.apply();
-                // Supression de la connection au service :
+                // Suppression de la connection au service :
                 doUnbindService();
                 finishAffinity();
                 System.exit(0); // Fin de l'appli
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         myEditor.putBoolean("musicIsOn", true);
         myEditor.putString("btnMusicString", "Musique OFF");
         myEditor.apply();
-        // Supression de la connection au service :
+        // Suppression de la connection au service :
         doUnbindService();
     }
 }
