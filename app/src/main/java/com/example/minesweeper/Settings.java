@@ -112,10 +112,7 @@ public class Settings extends AppCompatActivity {
                         btnOnOffMusic.setText(btnMusicString);
                     }
             }
-
-
         });
-
     }
 
     private void ShowUsernamePopup()
@@ -147,7 +144,7 @@ public class Settings extends AppCompatActivity {
         btnValidateUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        //Sauvegarde du nouveau username
+        // Sauvegarde du nouveau username
         myEditor.putString("username", etUsername.getText().toString());
         myEditor.apply();
         popup.cancel();
