@@ -3,7 +3,7 @@ package com.example.minesweeper;
 import java.util.Comparator;
 
 public class Scores {
-    //Classe Scores qui sert au stockage des scores
+    //lasse Scores qui sert au stockage des scores
     private String nom;
     private Integer temps;
 
